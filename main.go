@@ -1,7 +1,8 @@
 package main
 
 // This only works partially at the moment.
-// todo: Add functionality read a file's contents and print them out with funny colors
+// todo: Add functionality read a file's contents and print them out with funny colors # done
+// todo: if no file is provided then generate a random shakespeare quote in funny colors
 import (
 	"bufio"
 	"fmt"
