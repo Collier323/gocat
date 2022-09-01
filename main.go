@@ -8,11 +8,19 @@ import (
 	"io"
 	"math/rand"
 	"os"
+	"strings"
 	"time"
 )
 
 type Color struct {
 	a, b, c int
+}
+
+// Streamline error checking proccess
+func check(e error) {
+	if e != nil {
+		panic(e)
+	}
 }
 
 func main() {
@@ -22,7 +30,16 @@ func main() {
 		fmt.Println("Usage: Print funny colors")
 	}
 
-	reader := bufio.NewReader(os.Stdin)
+	file_name := os.Args[1:]
+	if len(os.Args) > 2 {
+		fmt.Println("Only enter one text file, please.")
+		return
+	}
+	file_join := strings.Join(file_name, "")
+	file, err := os.Open(file_join)
+	check(err)
+
+	reader := bufio.NewReader(file)
 	for {
 		// Main loop. Each iteration a new 'random' is created and will generate a random color for each rune.
 		s1 := rand.NewSource(time.Now().UnixNano())
